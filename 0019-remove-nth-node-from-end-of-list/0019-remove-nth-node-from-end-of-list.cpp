@@ -33,20 +33,38 @@ public:
         // delete temp;
         // return head;
 
-        vector<ListNode *> arr{head};
-        ListNode *tail = head->next;
-        while(tail){
-            arr.push_back(tail);
-            tail = tail->next;
+        // vector<ListNode *> arr{head};
+        // ListNode *tail = head->next;
+        // while(tail){
+        //     arr.push_back(tail);
+        //     tail = tail->next;
+        // }
+        // int toRem = arr.size() - n;
+        // // cout << arr.size() << n << toRem << '\n';
+        // if(toRem == 0){
+        //     head = head->next;
+        // } else {
+        //     arr[toRem-1]->next = arr[toRem]->next;
+        // }
+        // delete arr[toRem];
+        // return head;
+
+        queue<ListNode *> qu;
+        qu.push(head);
+        ListNode *temp = head->next;
+        while(temp){
+            if(qu.size() == n+1) qu.pop();
+            qu.push(temp);
+            temp = temp->next;
         }
-        int toRem = arr.size() - n;
-        // cout << arr.size() << n << toRem << '\n';
-        if(toRem == 0){
+        if(qu.size() == n) {
             head = head->next;
         } else {
-            arr[toRem-1]->next = arr[toRem]->next;
+            temp = qu.front();
+            qu.pop();
+            temp->next = qu.front()->next;
         }
-        delete arr[toRem];
+        delete qu.front();
         return head;
     }
 };
