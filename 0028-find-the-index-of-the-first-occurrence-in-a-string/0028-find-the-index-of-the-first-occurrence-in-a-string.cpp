@@ -49,7 +49,7 @@ class Solution {
                 ++i;
                 continue;
             }
-            j = needle[j-1];
+            j = arr[j-1];
         }
         return move(arr);
     }
