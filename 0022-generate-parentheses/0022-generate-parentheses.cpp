@@ -16,19 +16,19 @@ private:
     //     return dp[n] = ans;
     // }
 
-    void generateParenthesisHelper2(int l, int r, string &str, vector<string> &ans){
+    void generateParenthesisHelper2(int l, int r, string &&str, vector<string> &ans){
         if(l == 0 && r == 0){
             ans.push_back(str);
             return;
         }
         if(l>0){
             str.push_back('(');
-            generateParenthesisHelper2(l-1, r, str, ans);
+            generateParenthesisHelper2(l-1, r, move(str), ans);
             str.pop_back();
         }
         if(l<r){
             str.push_back(')');
-            generateParenthesisHelper2(l, r-1, str, ans);
+            generateParenthesisHelper2(l, r-1, move(str), ans);
             str.pop_back();
         }
     }
@@ -54,7 +54,7 @@ public:
 
         vector<string> ans;
         string str = "";
-        generateParenthesisHelper2(n, n, str, ans);
+        generateParenthesisHelper2(n, n, move(str), ans);
         return ans;
     }
 };
