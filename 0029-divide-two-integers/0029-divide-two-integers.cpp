@@ -53,10 +53,11 @@ private:
             dividend -= temp;
             ans -= itr;
             temp1 = temp << 1;
-            if(temp1 == INT_MIN) break;
+            if(dividend == 0 || temp1 == INT_MIN || temp1 > 0) break;
             temp = temp1;
             itr <<= 1;
         }
+        // cout << ans <<' '<<dividend<<' '<<temp<<'\n';
         while(dividend < 0){
             while(temp < dividend){
                 temp >>= 1;
