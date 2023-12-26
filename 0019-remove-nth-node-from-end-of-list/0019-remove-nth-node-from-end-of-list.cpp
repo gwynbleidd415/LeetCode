@@ -50,14 +50,14 @@ public:
         // return head;
 
         queue<ListNode *> qu;
-        qu.push(head);
+        qu.emplace(head);
         ListNode *temp = head->next;
         while(temp){
-            if(qu.size() == n+1) qu.pop();
-            qu.push(temp);
+            if(qu.size() == (size_t)n+1) qu.pop();
+            qu.emplace(temp);
             temp = temp->next;
         }
-        if(qu.size() == n) {
+        if(qu.size() == (size_t)n) {
             head = head->next;
         } else {
             temp = qu.front();
