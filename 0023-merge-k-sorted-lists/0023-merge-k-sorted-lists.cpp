@@ -38,17 +38,18 @@ public:
         };
         priority_queue<ListNode*, vector<ListNode*>, decltype(pqcomp)> pq(pqcomp);
         for(ListNode* &list: lists){
-            while(list){
-                pq.push(list);
-                list = list->next;
-            } 
+            if(list) pq.push(list);
         }
         ListNode mergedList(0);
         ListNode *curr = &mergedList;
+        ListNode *temp;
         while(!pq.empty()){
-            curr->next = pq.top();
-            curr = curr->next;
+            temp = pq.top();
             pq.pop();
+            curr->next = temp;
+            curr = curr->next;
+            temp = temp->next;
+            if(temp) pq.push(temp);
         }
         return mergedList.next;
     }
