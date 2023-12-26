@@ -52,8 +52,9 @@ public:
         queue<ListNode *> qu;
         qu.emplace(head);
         ListNode *temp = head->next;
+        size_t n1 = (size_t)(n+1);
         while(temp){
-            if(qu.size() == (size_t)n+1) qu.pop();
+            if(qu.size() == n1) qu.pop();
             qu.emplace(temp);
             temp = temp->next;
         }
