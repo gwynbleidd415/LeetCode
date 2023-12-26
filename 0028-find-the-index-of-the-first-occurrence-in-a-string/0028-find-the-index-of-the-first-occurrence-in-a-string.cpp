@@ -33,9 +33,50 @@ class Solution {
         }
         return -1;
     }
+    vector<int> kmpArray(string &needle){
+        int n = needle.size();
+        vector<int> arr(n);
+        arr[0] = 0;
+        int i{1}, j{0};
+        while(i<n){
+            if(needle[i] == needle[j]){
+                arr[i] = j+1;
+                ++i, ++j;
+                continue;
+            }
+            if(j == 0){
+                arr[i] = 0;
+                ++i;
+                continue;
+            }
+            j = needle[j-1];
+        }
+        return move(arr);
+    }
+    int kmpAlgorithm(string &haystack, string &needle){
+        vector<int> kmpArr = kmpArray(needle);
+        int n = haystack.size(), m = needle.size();
+        int i{0},j{0};
+        while(i<n){
+            if(haystack[i] == needle[j]){
+                ++i, ++j;
+                if(j == m){
+                    return i-j;
+                }
+                continue;
+            }
+            if(j == 0) {
+                ++i;
+                continue;
+            }
+            j = kmpArr[j-1];
+        }
+        return -1;
+    }
 public:
     int strStr(string haystack, string needle) {
         // return bruteForce(haystack, needle);
-        return zAlgorithm(haystack, needle);
+        // return zAlgorithm(haystack, needle);
+        return kmpAlgorithm(haystack, needle);
     }
 };
