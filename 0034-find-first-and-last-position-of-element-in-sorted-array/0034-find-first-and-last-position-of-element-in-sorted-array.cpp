@@ -15,8 +15,8 @@ public:
         l = 0, r = nums.size()-1;
         while(l<r){
             mid = (l+r+1)>>1;
-            if(nums[mid]<=target) l = mid;
-            else r = mid-1;
+            if(nums[mid]>target) r = mid-1;
+            else l = mid;
         }
         endPos = l;
         return {startPos, endPos};
