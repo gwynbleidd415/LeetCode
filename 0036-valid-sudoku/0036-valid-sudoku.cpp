@@ -38,8 +38,25 @@ class Solution {
         }
         return true;
     }
+    bool areGridsValidFast(vector<vector<char>>& board){
+        vector<bool> arr(9);
+        int x, y, a, b;
+        for(int i{0};i<9;i+=3){
+            for(int j{0};j<9;j+=3){
+                fill(arr.begin(), arr.end(), false);
+                for(int k{i};k<i+3;++k){
+                    for(int l{j};l<j+3;++l){
+                        if(board[k][l]=='.') continue;
+                        if(arr[board[k][l] - '1']) return false;
+                        arr[board[k][l] - '1'] = true;
+                    }
+                }
+            }
+        }
+        return true;
+    }
 public:
     bool isValidSudoku(vector<vector<char>>& board) {
-        return areRowsValid(board) && areColumnsValid(board) && areGridsValid(board);
+        return areRowsValid(board) && areColumnsValid(board) && areGridsValidFast(board);
     }
 };
