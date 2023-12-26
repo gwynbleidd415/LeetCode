@@ -75,8 +75,8 @@ class Solution {
     }
 public:
     int strStr(string haystack, string needle) {
-        return bruteForce(haystack, needle);
+        // return bruteForce(haystack, needle);
         // return zAlgorithm(haystack, needle);
-        // return kmpAlgorithm(haystack, needle);
+        return kmpAlgorithm(haystack, needle);
     }
 };
