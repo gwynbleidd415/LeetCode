@@ -1,15 +1,4 @@
 class Solution {
-    void printMatrix(vector<vector<int>>& matrix){
-        cout << '[';
-        for(auto &arr: matrix){
-            cout << '[';
-            for(auto el: arr){
-                cout << el << ',';
-            }
-            cout << "],";
-        }
-        cout << "]\n";
-    }
 public:
     void rotate(vector<vector<int>>& matrix) {
         int n = matrix.size(), m = (n >> 1), n1=n-1;
@@ -22,7 +11,6 @@ public:
                     swap(matrix[x][y], matrix[x1][y1]);
                     x = x1, y = y1;
                 }
-                // printMatrix(matrix);
             }
         }
     }
