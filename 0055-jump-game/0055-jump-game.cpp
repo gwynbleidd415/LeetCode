@@ -27,14 +27,21 @@ public:
         // }
         // return canJump[0];
 
+        // int n{(int)nums.size()};
+        // vector<int> lji(n);
+        // lji.back() = n-1;
+        // int temp{};
+        // for(int i{n-2}; i>=0 ; --i){
+        //     if(nums[i]+i >= lji[i+1]) lji[i] = i;
+        //     else lji[i] = lji[i+1];
+        // }
+        // return lji.front() == 0;
+
         int n{(int)nums.size()};
-        vector<int> lji(n);
-        lji.back() = n-1;
-        int temp{};
+        int lastPos{n-1};
         for(int i{n-2}; i>=0 ; --i){
-            if(nums[i]+i >= lji[i+1]) lji[i] = i;
-            else lji[i] = lji[i+1];
+            if(nums[i]+i >= lastPos) lastPos = i;
         }
-        return lji.front() == 0;
+        return lastPos == 0;
     }
 };
