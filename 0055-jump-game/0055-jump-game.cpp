@@ -1,3 +1,4 @@
+int speedUp = []{std::ios::sync_with_stdio(0); std::cin.tie(0); std::cout.tie(0); return 0;}();
 class Solution {
 private:
     // void printVector(vector<bool> &arr){
