@@ -1,3 +1,10 @@
+const static int initialize = [] { 
+    std::ios::sync_with_stdio(false); 
+    std::cin.tie(0); 
+    std::cout.tie(0); 
+    return 0; 
+}();
+
 class Solution {
 public:
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
