@@ -1,8 +1,8 @@
-int initialize = [] { 
-    std::ios::sync_with_stdio(false); 
-    std::cin.tie(0); 
-    std::cout.tie(0); 
-    return 0; 
+const static int initialize = [] {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    std::cout.tie(nullptr);
+    return 0;
 }();
 
 class Solution {
