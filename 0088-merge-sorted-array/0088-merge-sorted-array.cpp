@@ -1,4 +1,4 @@
-const static int initialize = [] { 
+int initialize = [] { 
     std::ios::sync_with_stdio(false); 
     std::cin.tie(0); 
     std::cout.tie(0); 
