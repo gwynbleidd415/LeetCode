@@ -15,22 +15,18 @@ public:
         int al{0}, len{INT_MAX};
         while(r<m){
             if(ccharr[s[r]]){
-                --charr[s[r]];
-                if(charr[s[r]] == 0) --toPos;
+                if(--charr[s[r]] == 0) --toPos;
             }
             ++r;
             if(toPos) {
                 continue;
             }
-            // cout << r << ' ';
-            while(l < r && toPos == 0){
+            while(toPos == 0){
                 if(ccharr[s[l]]){
-                    if(charr[s[l]] == 0) ++toPos;
-                    ++charr[s[l]];
+                    if(++charr[s[l]] == 1) ++toPos;
                 }
                 ++l;
             }
-            // cout << l << '\n';
             if(r-l+1 < len) {
                 al = l-1;
                 len = r-l+1;
