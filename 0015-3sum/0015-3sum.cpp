@@ -17,10 +17,16 @@ public:
                 } else if(tSum == 0){
                     ans.push_back({nums[i], nums[j], nums[k]});
                     ++j, --k;
-                    while(j<k && nums[j] == nums[j-1]) ++j;
-                    while(k>j && nums[k] == nums[k+1]) --k;
+                    // while(j<k && nums[j] == nums[j-1]) ++j;
+                    // while(k>j && nums[k] == nums[k+1]) --k;
                 } else {
                     --k;
+                }
+                if(j>i+1){
+                    while(j<k && nums[j] == nums[j-1]) ++j;
+                }
+                if(k < n1){
+                    while(k>j && nums[k] == nums[k+1]) --k;
                 }
             }
             ++i;
