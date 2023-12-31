@@ -7,7 +7,6 @@ public:
             mid = (l+r) >> 1;
             th = 0;
             for(int pile: piles) th += pile/mid + (pile%mid == 0 ? 0 : 1);
-            // cout<<l<<' '<<mid<<' '<<r<<' '<<th<<'\n';
             if(th>h) l = mid + 1;
             else r = mid;
         }
