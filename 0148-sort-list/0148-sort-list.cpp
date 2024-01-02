@@ -28,6 +28,22 @@ class Solution {
 
         return ans.next;
     }
+    ListNode* mergeSort2(ListNode *head) {
+        if(!head) return nullptr;
+        if(!(head->next)) return head;
+
+        ListNode *left{head}, *right{head->next};
+        while(right && right->next) {
+            left = left->next;
+            right = right->next->next;
+        }
+
+        right = mergeSort2(left->next);
+        left->next = nullptr;
+        left = mergeSort2(head);
+
+        return merge(left, right);
+    }
     ListNode* mergeSort(ListNode *head, ListNode *tail) {
         if(head == tail) return nullptr;
         if(head->next == tail){
@@ -49,6 +65,7 @@ class Solution {
     }
 public:
     ListNode* sortList(ListNode* head) {
-        return mergeSort(head, nullptr);
+        return mergeSort2(head);
+        // return mergeSort(head, nullptr);
     }
 };
