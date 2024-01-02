@@ -13,9 +13,8 @@ public:
     ListNode* oddEvenList(ListNode* head) {
         if(!head) return nullptr;
         ListNode *t1{head}, *t2{head->next}, *head2{t2};
-        while(t2){
+        while(t2 && t2->next){
             t1->next = t2->next;
-            if(!(t1->next)) break;
             t1 = t1->next;
             t2->next = t1->next;
             t2 = t2->next;
