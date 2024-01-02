@@ -13,8 +13,9 @@ public:
         int cnt{0};
         while(travA != travB){
             if(travA == nullptr) travA = headB;
+            else travA = travA->next;
             if(travB == nullptr) travB = headA;
-            travA = travA->next, travB = travB->next;
+            else travB = travB->next;
         };
         return travA;
         // ListNode *travA{headA}, *travB{headB};
