@@ -11,18 +11,26 @@ public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         ListNode *travA{headA}, *travB{headB};
         int cnt{0};
-        do{
-            if(travA == travB) return travA;
+        while(travA != travB){
+            if(travA == nullptr) travA = headB;
+            if(travB == nullptr) travB = headA;
             travA = travA->next, travB = travB->next;
-            if(travA == nullptr){
-                travA = headB;
-                ++cnt;
-            }
-            if(travB == nullptr){
-                travB = headA;
-                ++cnt;
-            }
-        }while(cnt<3);
-        return nullptr;
+        };
+        return travA;
+        // ListNode *travA{headA}, *travB{headB};
+        // int cnt{0};
+        // do{
+        //     if(travA == travB) return travA;
+        //     travA = travA->next, travB = travB->next;
+        //     if(travA == nullptr){
+        //         travA = headB;
+        //         ++cnt;
+        //     }
+        //     if(travB == nullptr){
+        //         travB = headA;
+        //         ++cnt;
+        //     }
+        // }while(cnt<3);
+        // return nullptr;
     }
 };
