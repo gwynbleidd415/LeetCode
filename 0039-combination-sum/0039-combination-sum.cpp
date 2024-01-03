@@ -16,7 +16,7 @@ private:
             ans.push_back(selected);
             return;
         }
-        if(i == candidates.size() || target < 0) return;
+        if(i == candidates.size() || candidates[i] > target) return;
         combinationSumHelper(candidates, ans, selected, target, i+1);
         selected.push_back(candidates[i]);
         combinationSumHelper(candidates, ans, selected, target-candidates[i], i);
@@ -29,10 +29,12 @@ public:
         // vector<int> selected;
         // combinationSumHelper(candidates, ans, selected, target, 0);
         // return ans;
+
         int n = candidates.size();
+        sort(candidates.begin(), candidates.end());
         vector<vector<int>> ans;
         vector<int> selected;
-        combinationSumHelper(candidates, ans, selected, target, 0);
+        combinationSumHelper2(candidates, ans, selected, target, 0);
         return ans;
     }
 };
