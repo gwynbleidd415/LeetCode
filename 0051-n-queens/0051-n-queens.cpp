@@ -26,16 +26,15 @@ private:
                 }
             }
             if(isValid) {
-                qs.push_back(j);
+                qs[i] = j;
                 solveNQueensHelper(n, i+1, qs, ans);
-                qs.pop_back();
             }
         }
     }
 public:
     vector<vector<string>> solveNQueens(int n) {
         vector<vector<string>> ans;
-        vector<int> qs;
+        vector<int> qs(n);
         solveNQueensHelper(n, 0, qs, ans);
         return ans;
     }
