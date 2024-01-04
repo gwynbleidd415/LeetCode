@@ -34,7 +34,7 @@ private:
     }
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-        // return nextGreaterElementSolver1(nums1, nums2);
-        return nextGreaterElementSolver2(nums1, nums2);
+        return nextGreaterElementSolver1(nums1, nums2);
+        // return nextGreaterElementSolver2(nums1, nums2);
     }
 };
