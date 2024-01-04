@@ -68,15 +68,16 @@ private:
         if(head->next) head = head->next, head->prev = nullptr;
         else head = tail = nullptr;
         umitr = umap.find(node->key);
-        // delete node;
+        delete node;
         umap.erase(umitr);
     }
     void moveNodeToBack(Node *node) {
-        if(node->next) node->next->prev = node->prev;
-        else return;
-        if(node->prev) node->prev->next = node->next;
-        else head = node->next;
+        if(node == tail) return;
+        else node->next->prev = node->prev;
+        if(node == head) head = head->next;
+        else node->prev->next = node->next;
         node->prev = tail, tail->next = node, node->next = nullptr;
+        tail = node;
     }
 public:
     LRUCache(int capacity) : capacity(capacity) {}
