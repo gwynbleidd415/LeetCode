@@ -15,10 +15,10 @@ private:
             dqu.push_back(i);
             ans[j] = nums[dqu.front()];
         }
-        return ans;
+        return move(ans);
     }
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        return solution1(nums, k);
+        return move(solution1(nums, k));
     }
 };
