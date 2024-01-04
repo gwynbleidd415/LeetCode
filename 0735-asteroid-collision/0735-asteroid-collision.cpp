@@ -22,8 +22,27 @@ private:
         }
         return ans;
     }
+    vector<int> solution3(vector<int>& asteroids) {
+        vector<int> ans;
+        stack<int> st;
+        for(int asteroid: asteroids) {
+            if(asteroid > 0) {
+                st.push(asteroid);
+                continue;
+            }
+            while(!st.empty() && st.top() < -asteroid) st.pop();
+            if(st.empty()) ans.push_back(asteroid);
+            else if(st.top() == -asteroid) st.pop();
+        }
+        int sz = ans.size();
+        while(!st.empty()) ans.push_back(st.top()), st.pop();
+        reverse(ans.begin()+sz, ans.end());
+        return ans;
+    }
 public:
     vector<int> asteroidCollision(vector<int>& asteroids) {
-        return solution2(asteroids);
+        // return solution1(asteroids);
+        // return solution2(asteroids);
+        return solution3(asteroids);
     }
 };
