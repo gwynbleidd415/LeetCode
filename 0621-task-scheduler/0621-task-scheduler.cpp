@@ -27,8 +27,15 @@ class Solution {
         }
         return ans;
     }
+    int solution2(vector<char>& tasks, int n) {
+        if(n==0) return tasks.size();
+        int ans{0};
+        vector<int> count(26);
+        for(char &task: tasks) ++count[task-'A'];
+    }
 public:
     int leastInterval(vector<char>& tasks, int n) {
-        return solution1(tasks, n);
+        // return solution1(tasks, n);
+        return solution2(tasks, n);
     }
 };
