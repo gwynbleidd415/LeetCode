@@ -29,9 +29,15 @@ class Solution {
     }
     int solution2(vector<char>& tasks, int n) {
         if(n==0) return tasks.size();
-        int ans{0};
         vector<int> count(26);
         for(char &task: tasks) ++count[task-'A'];
+        sort(count.begin(), count.end(), greater<int>());
+        int cnt{0};
+        for(int cc: count) {
+            if(cc == count.front()) ++cnt;
+            else break;
+        }
+        return max((count.front()-1)*(n+1) + cnt, (int)tasks.size());
     }
 public:
     int leastInterval(vector<char>& tasks, int n) {
