@@ -37,8 +37,27 @@ private:
         }
         return (si + b.size())/a.size() + ((si+b.size())%a.size() == 0 ? 0 : 1);
     }
+    int rabinKarpMethod2(string &a, string &b) {
+        long hashB{b[0] - 'a'}, hashA{a[0] - 'a'}, maxPow{1};
+        int ei{1}, si{0};
+        for(int i{1};i<b.size();++i, ++ei) {
+            if(ei == a.size()) ei = 0;
+            hashB = ((hashB*MULT)%MOD + (b[i]-'a'))%MOD;
+            hashA = ((hashA*MULT)%MOD + (a[ei]-'a'))%MOD;
+            maxPow = (maxPow*MULT)%MOD;
+        }
+        while(hashA != hashB || !doesMatch(a, b, si, b.size())) {
+            if(ei == a.size()) ei = 0;
+            hashA = (MOD + hashA - (maxPow*(a[si]-'a'))%MOD)%MOD;
+            hashA = ((hashA*MULT)%MOD + (a[ei]-'a'))%MOD;
+            ++si, ++ei;
+            if(si == a.size()) return -1;
+        }
+        return (si + b.size())/a.size() + ((si+b.size())%a.size() == 0 ? 0 : 1); 
+    }
 public:
     int repeatedStringMatch(string a, string b) {
-        return rabinKarpMethod(a, b);
+        // return rabinKarpMethod(a, b);
+        return rabinKarpMethod2(a, b);
     }
 };
