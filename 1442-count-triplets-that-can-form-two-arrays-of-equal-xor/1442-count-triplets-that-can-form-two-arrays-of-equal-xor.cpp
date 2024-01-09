@@ -11,8 +11,20 @@ private:
         }
         return ans;
     }
+    int solution2(vector<int>& arr) {
+        unordered_map<int, vector<int>> umap;
+        umap[0].push_back(0);
+        int ans{0}, curx{0};
+        for(int i{0};i<arr.size();++i) {
+            curx ^= arr[i];
+            for(int j{0};j<umap[curx].size();++j) ans += i - umap[curx][j];
+            umap[curx].push_back(i+1);
+        }
+        return ans;
+    }
 public:
     int countTriplets(vector<int>& arr) {
-        return solution1(arr);
+        // return solution1(arr);
+        return solution2(arr);
     }
 };
