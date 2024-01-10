@@ -43,8 +43,8 @@ private:
     }
 public:
     int longestPalindromeSubseq(string s) {
-        return solution1(s);
-        // return solution2(s);
+        // return solution1(s);
+        return solution2(s);
         // return solution3(s);
     }
 };
