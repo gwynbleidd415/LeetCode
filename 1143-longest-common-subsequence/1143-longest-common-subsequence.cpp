@@ -22,6 +22,7 @@ private:
                 else dp[j+1] = max(dp[j], dp[j+1]);
                 temp2 = temp1;
             }
+            temp2 = 0;
         }
         return dp.back();
     }
