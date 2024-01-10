@@ -19,7 +19,6 @@ private:
         int n = s.size();
         vector<vector<int>> dp(n, vector<int>(n));
         for(int i{0};i<n;++i) dp[i][i] = 1;
-        int temp;
         for(int i{1};i<n;++i) {
             for(int j{0};j+i<n;++j) {
                 if(s[j] == s[j+i]) dp[j][j+i] = dp[j+1][j+i-1] + 2;
@@ -30,21 +29,24 @@ private:
     }
     int solution3(string &s) {
         int n = s.size();
-        vector<vector<int>> dp(n, vector<int>(n));
-        for(int i{0};i<n;++i) dp[i][i] = 1;
-        int temp;
+        vector<int> dp(n, 1);
+        vector<int> dpp(n, 0);
         for(int i{1};i<n;++i) {
             for(int j{0};j+i<n;++j) {
-                if(s[j] == s[j+i]) dp[j][j+i] = dp[j+1][j+i-1] + 2;
-                else dp[j][j+i] = max(dp[j+1][j+i], dp[j][j+i-1]);
+                dpp[j] = dp[j];
+                if(s[j] == s[j+i]) {
+                    dp[j] = dpp[j+1] + 2;
+                } else {
+                    dp[j] = max(dp[j], dp[j+1]);
+                }
             }
         }
-        return dp.front().back();
+        return dp.front();
     }
 public:
     int longestPalindromeSubseq(string s) {
         // return solution1(s);
-        return solution2(s);
-        // return solution3(s);
+        // return solution2(s);
+        return solution3(s);
     }
 };
