@@ -12,8 +12,25 @@ class Solution {
         }
         return dp.back().back();
     }
+    int solution2(string word1, string word2) {
+        int n = word1.size(), m = word2.size();
+        vector<int> dp(m+1);
+        for(int i{1};i<=m;++i) dp[i] = i;
+        int temp, prev;
+        for(int i{1};i<=n;++i){
+            prev = i-1, dp[0] = i;
+            for(int j{1};j<=m;++j){
+                temp = dp[j];
+                if(word1[i-1] == word2[j-1]) dp[j] = prev;
+                else dp[j] = min(prev, min(dp[j], dp[j-1])) + 1;
+                prev = temp;
+            }
+        }
+        return dp.back();
+    }
 public:
     int minDistance(string word1, string word2) {
-        return solution1(word1, word2);
+        // return solution1(word1, word2);
+        return solution2(word1, word2);
     }
 };
