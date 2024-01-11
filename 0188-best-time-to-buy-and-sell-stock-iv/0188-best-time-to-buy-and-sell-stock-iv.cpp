@@ -28,9 +28,26 @@ class Solution {
         }
         return dp.back().front().front();
     }
+    int solution3(int k, vector<int>& prices) {
+        int n = prices.size(), n2{n-2};
+        vector<vector<int>> dp(n, vector<int>(2, 0));
+        int temp, prev;
+        dp.back()[1] = prices.back();
+        for(int i{0};i<k;++i) {
+            prev = 0;
+            for(int j{n2};j>=0;--j){
+                temp = dp[j][0];
+                dp[j][0] = max(dp[j+1][0], dp[j+1][1] - prices[j]);
+                dp[j][1] = max(dp[j+1][1], prices[j] + prev);
+                prev = temp;
+            }
+        }
+        return dp.front().front();
+    }
 public:
     int maxProfit(int k, vector<int>& prices) {
         // return solution1(k, prices);
-        return solution2(k, prices);
+        // return solution2(k, prices);
+        return solution3(k, prices);
     }
 };
