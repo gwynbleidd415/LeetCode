@@ -12,8 +12,25 @@ class Solution {
         vector<vector<vector<int>>> dp(k+1, vector<vector<int>>(prices.size(), vector<int>(2, -1)));
         return solution1Helper(k, prices, dp, 0, true);
     }
+    int solution2(int k, vector<int>& prices) {
+        int n = prices.size(), n2{n-2};
+        vector<vector<vector<int>>> dp(k, vector<vector<int>>(n, vector<int>(2, 0)));
+        for(int i{0};i<k;++i) dp[i].back().back() = prices.back();
+        for(int i{n2};i>=0;--i) {
+            dp[0][i][0] = max(dp[0][i+1][0], dp[0][i+1][1] - prices[i]);
+            dp[0][i][1] = max(dp[0][i+1][1], prices[i]);
+        }
+        for(int i{1};i<k;++i) {
+            for(int j{n2};j>=0;--j){
+                dp[i][j][0] = max(dp[i][j+1][0], dp[i][j+1][1] - prices[j]);
+                dp[i][j][1] = max(dp[i][j+1][1], prices[j] + dp[i-1][j+1][0]);
+            }
+        }
+        return dp.back().front().front();
+    }
 public:
     int maxProfit(int k, vector<int>& prices) {
-        return solution1(k, prices);
+        // return solution1(k, prices);
+        return solution2(k, prices);
     }
 };
