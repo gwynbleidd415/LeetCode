@@ -11,8 +11,22 @@ private:
         }
         return ans;
     }
+    int solution2(vector<int>& nums) {
+        vector<int> lis;
+        vector<int>::iterator lisi;
+        lis.reserve(nums.size());
+        lis.push_back(nums.front());
+        int n = nums.size();
+        for(int i{1};i<n;++i) {
+            lisi = lower_bound(lis.begin(), lis.end(), nums[i]);
+            if(lisi == lis.end()) lis.push_back(nums[i]);
+            else *lisi = nums[i];
+        }
+        return lis.size();
+    }
 public:
     int lengthOfLIS(vector<int>& nums) {
-        return solution1(nums);
+        // return solution1(nums);
+        return solution2(nums);
     }
 };
