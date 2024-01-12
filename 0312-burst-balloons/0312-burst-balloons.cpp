@@ -30,8 +30,27 @@ private:
         vector<vector<int>> dp(nums.size(), vector<int>(nums.size(), -1));
         return solution1Helper2(nums, dp, 0, nums.size()-1);
     }
+    int solution2(vector<int> &nums) {
+        int n = nums.size();
+        vector<vector<int>> dp(n, vector<int>(n));
+        int mult, ei, ans;
+        dp.front().front() = nums.front() * (n>1 ? nums[1] : 1);
+        dp.back().back() = nums.back() * (n>1 ? nums[n-2] : 1);
+        for(int i{1};i+1<n;++i) dp[i][i] = nums[i-1] * nums[i] * nums[i+1];
+        for(int i{1};i<n;++i) {
+            for(int j{0};(ei = j+i)<n;++j) {
+                mult = (j>0 ? nums[j-1] : 1) * (ei+1<n ? nums[ei+1] : 1);
+                dp[j][ei] = max(dp[j+1][ei] + nums[j]*mult, dp[j][ei-1] + nums[ei]*mult);
+                for(int k{j+1};k<ei;++k) {
+                    dp[j][ei] = max(dp[j][ei], dp[j][k-1] + dp[k+1][ei] + nums[k]*mult);
+                }
+            }
+        }
+        return dp.front().back();
+    }
 public:
     int maxCoins(vector<int>& nums) {
-        return solution1(nums);
+        // return solution1(nums);
+        return solution2(nums);
     }
 };
