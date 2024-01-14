@@ -40,7 +40,7 @@ private:
     }
 public:
     string longestCommonPrefix(vector<string>& strs) {
-        return solution1(strs);
-        // return solution2(strs);
+        // return solution1(strs);
+        return solution2(strs);
     }
 };
