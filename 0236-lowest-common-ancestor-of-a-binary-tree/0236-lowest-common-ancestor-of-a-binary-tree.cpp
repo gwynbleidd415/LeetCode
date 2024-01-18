@@ -35,13 +35,22 @@ private:
         if(arr1.size() == 0) return q;
         if(arr2.size() == 0) return p;
         for(int i{1};i<arr1.size();++i) {
-            // cout << arr1[i]->val << ' ' << arr2[i]->val << '\n';
             if(arr1[i]!=arr2[i]) return arr1[i-1];
         }
         return arr1.back();
     }
+    TreeNode* solution2(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root == nullptr) return nullptr;
+        if(root == p || root == q) return root;
+        TreeNode *left = solution2(root->left, p, q);
+        TreeNode *right = solution2(root->right, p, q);
+        if(left && right) return root;
+        if(left) return left;
+        return right;
+    }
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        return solution1(root, p, q);
+        // return solution1(root, p, q);
+        return solution2(root, p, q);
     }
 };
