@@ -40,13 +40,12 @@ private:
         return arr1.back();
     }
     TreeNode* solution2(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if(root == nullptr) return nullptr;
-        if(root == p || root == q) return root;
+        if(root == nullptr || root == p || root == q) return root;
         TreeNode *left = solution2(root->left, p, q);
         TreeNode *right = solution2(root->right, p, q);
-        if(left && right) return root;
-        if(left) return left;
-        return right;
+        if(left == nullptr) return right;
+        if(right == nullptr) return left;
+        return root;
     }
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
