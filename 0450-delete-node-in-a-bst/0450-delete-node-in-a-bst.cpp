@@ -47,8 +47,43 @@ private:
     TreeNode* solution1(TreeNode* root, int key) {
         return solution1Helper(root, key);
     }
+    TreeNode* deleteRoot2(TreeNode *root) {
+        TreeNode *temp;
+        if(root->left == nullptr) {
+            temp = root->right;
+            delete root;
+            return temp;
+        }
+        if(root->right == nullptr) {
+            temp = root->left;
+            delete root;
+            return temp;
+        }
+        temp = root->left;
+        while(temp->right) temp = temp->right;
+        temp->right = root->right;
+        temp = root->left;
+        delete root;
+        return temp;
+    }
+    TreeNode* solution2(TreeNode* root, int key) {
+        if(root == nullptr) return nullptr;
+        if(root->val == key) return deleteRoot2(root);
+        TreeNode *temp = root, *par = nullptr;
+        while(temp && temp->val != key) {
+            par = temp;
+            if(key > temp->val) temp = temp->right;
+            else temp = temp->left;
+        }
+        if(temp) {
+            if(par->left == temp) par->left = deleteRoot2(temp);
+            else par->right = deleteRoot2(temp);
+        }
+        return root;
+    }
 public:
     TreeNode* deleteNode(TreeNode* root, int key) {
-        return solution1(root, key);
+        // return solution1(root, key);
+        return solution2(root, key);
     }
 };
