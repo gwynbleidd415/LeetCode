@@ -71,13 +71,19 @@ private:
         if(root->val == key) return deleteRoot2(root);
         TreeNode *temp = root, *par = nullptr;
         while(temp && temp->val != key) {
-            par = temp;
-            if(key > temp->val) temp = temp->right;
-            else temp = temp->left;
-        }
-        if(temp) {
-            if(par->left == temp) par->left = deleteRoot2(temp);
-            else par->right = deleteRoot2(temp);
+            if(key > temp->val) {
+                if(temp->right == nullptr) break;
+                if(temp->right->val == key) {
+                    temp->right = deleteRoot2(temp->right);
+                    break;
+                } else temp = temp->right;
+            } else {
+                if(temp->left == nullptr) break;
+                if(temp->left->val == key) {
+                    temp->left = deleteRoot2(temp->left);
+                    break;
+                } else temp = temp->left;
+            }
         }
         return root;
     }
