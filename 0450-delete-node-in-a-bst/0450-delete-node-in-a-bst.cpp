@@ -70,7 +70,7 @@ private:
         if(root == nullptr) return nullptr;
         if(root->val == key) return deleteRoot2(root);
         TreeNode *temp = root, *par = nullptr;
-        while(temp && temp->val != key) {
+        while(true) {
             if(key > temp->val) {
                 if(temp->right == nullptr) break;
                 if(temp->right->val == key) {
