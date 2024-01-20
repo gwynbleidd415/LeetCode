@@ -27,8 +27,20 @@ private:
     bool solution1(TreeNode* root, int k) {
         return solution1Helper(root, root, k);
     }
+    bool solution2Helper(TreeNode *root, unordered_set<int> &uset, int k) {
+        if(root == nullptr) return false;
+        if(uset.find(k-root->val) != uset.end()) return true;
+        uset.insert(root->val);
+        if(solution2Helper(root->left, uset, k)) return true;
+        return solution2Helper(root->right, uset, k); 
+    }
+    bool solution2(TreeNode* root, int k) {
+        unordered_set<int> uset;
+        return solution2Helper(root, uset, k);
+    }
 public:
     bool findTarget(TreeNode* root, int k) {
-        return solution1(root, k);
+        // return solution1(root, k);
+        return solution2(root, k);
     }
 };
