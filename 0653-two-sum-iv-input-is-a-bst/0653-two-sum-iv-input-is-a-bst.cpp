@@ -38,9 +38,36 @@ private:
         unordered_set<int> uset;
         return solution2Helper(root, uset, k);
     }
+    void printArr(vector<int> &arr) {
+        for(auto itr: arr) {
+            cout << itr << ' ';
+        }
+        cout << '\n';
+    }
+    bool solution3Helper(TreeNode *root, vector<int> &arr, int k, bool &notAv) {
+        if(root == nullptr) return false;
+        if(solution3Helper(root->left, arr, k, notAv)) return true;
+        if(notAv) return false;
+        // cout << root->val << " : ";
+        // printArr(arr);
+        int ind = lower_bound(arr.begin(), arr.end(), k-root->val) - arr.begin();
+        if(ind < arr.size() && arr[ind] == k-root->val) return true;
+        if(ind == 0 && arr.size() != 0) {
+            notAv = true;
+            return false;
+        };
+        arr.push_back(root->val);
+        return solution3Helper(root->right, arr, k, notAv);
+    }
+    bool solution3(TreeNode* root, int k) {
+        vector<int> arr;
+        bool notAv = false;
+        return solution3Helper(root, arr, k, notAv);
+    }
 public:
     bool findTarget(TreeNode* root, int k) {
         // return solution1(root, k);
-        return solution2(root, k);
+        // return solution2(root, k);
+        return solution3(root, k);
     }
 };
