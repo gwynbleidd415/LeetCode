@@ -106,8 +106,40 @@ private:
         };
         return 0;
     }
+    int solution2(string beginWord, string endWord, vector<string>& wordList) {
+        int n = beginWord.size();
+        unordered_set<string> uset;
+        uset.insert(wordList.begin(), wordList.end());
+        uset.erase(beginWord);
+        if(uset.find(endWord) == uset.end()) return 0;
+        queue<string> qu;
+        qu.push(beginWord);
+        int ans{1};
+        char orig;
+        string word;
+        int sz;
+        while(!qu.empty()) {
+            ++ans;
+            sz = qu.size();
+            for(int ii{0};ii<sz;++ii){
+                word = qu.front(), qu.pop();
+                for(int i{0};i<n;++i) {
+                    orig = word[i];
+                    for(char ch='a';ch<='z';++ch) {
+                        if(ch == orig) continue;
+                        word[i] = ch;
+                        if(word == endWord) return ans;
+                        if(uset.find(word) != uset.end()) qu.push(word), uset.erase(word);
+                    }
+                    word[i] = orig;
+                }
+            }
+        }
+        return 0;
+    }
 public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
-        return solution1(beginWord, endWord, wordList);
+        // return solution1(beginWord, endWord, wordList);
+        return solution2(beginWord, endWord, wordList);
     }
 };
