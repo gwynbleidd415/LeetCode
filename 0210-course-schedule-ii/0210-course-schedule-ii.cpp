@@ -30,8 +30,30 @@ private:
         }
         return ans;
     }
+    vector<int> solution2(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<vector<int>> adj(numCourses);
+        vector<int> inDegree(numCourses);
+        for(vector<int> &itr: prerequisites) {
+            adj[itr[1]].push_back(itr[0]);
+            ++inDegree[itr[0]];
+        }
+        queue<int> qu;
+        for(int i{0};i<numCourses;++i) {
+            if(inDegree[i] == 0) qu.push(i);
+        }
+        vector<int> ans;
+        int front;
+        while(!qu.empty()) {
+            front = qu.front(), qu.pop();
+            ans.push_back(front);
+            for(int itr: adj[front]) if(--inDegree[itr] == 0) qu.push(itr);
+        }
+        if(ans.size() == numCourses) return ans;
+        return {};
+    }
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
-        return solution1(numCourses, prerequisites);
+        // return solution1(numCourses, prerequisites);
+        return solution2(numCourses, prerequisites);
     }
 };
