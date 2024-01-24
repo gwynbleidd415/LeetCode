@@ -41,14 +41,15 @@ private:
         for(int i{0};i<numCourses;++i) {
             if(inDegree[i] == 0) qu.push(i);
         }
-        vector<int> ans;
+        vector<int> ans(numCourses);
         int front;
+        int ai{0};
         while(!qu.empty()) {
             front = qu.front(), qu.pop();
-            ans.push_back(front);
+            ans[ai++] = front;
             for(int itr: adj[front]) if(--inDegree[itr] == 0) qu.push(itr);
         }
-        if(ans.size() == numCourses) return ans;
+        if(ai == numCourses) return ans;
         return {};
     }
 public:
