@@ -1,6 +1,6 @@
 class Solution {
-public:
-    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+private:
+    int solution1(int n, vector<vector<int>>& flights, int src, int dst, int k) {
         vector<vector<pair<int, int>>> adj(n);
         for(vector<int> &flight: flights) {
             adj[flight[0]].push_back({flight[1], flight[2]});
@@ -25,5 +25,9 @@ public:
             ++ck;
         }
         return pr[dst] == INT_MAX ? -1 : pr[dst];
+    }
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
+        return solution1(n, flights, src, dst, k);
     }
 };
