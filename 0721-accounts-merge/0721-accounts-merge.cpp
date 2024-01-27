@@ -6,6 +6,7 @@ public:
     DisjointSet(int n) {
         par.resize(n), sz.resize(n);
         iota(par.begin(), par.end(), 0);
+        fill(sz.begin(), sz.end(), 1);
     }
     int find(int i) {
         if(par[i] == i) return i;
