@@ -25,15 +25,16 @@ class Solution {
             else nnums[k++] = nums[i++];
         }
         while(i<=m) nnums[k++] = nums[i++];
+        if(j<=e) nnums[k++] = nums[j++];
         while(j<=e) {
-            nnums[k++] = nums[j++];
-            if(lgi < js && j<=e) {
+            if(lgi < js) {
                 tar = (long)nums[j] << 1;
                 lgi = upper_bound(nums.begin() + lgi, nums.begin()+js, tar) - nums.begin();
                 if(lgi < js) {
                     rps += js-lgi;
                 } 
             }
+            nnums[k++] = nums[j++];
         }
         for(i=s, k=0;k<sz;++k, ++i) {
             nums[i] = nnums[k];
