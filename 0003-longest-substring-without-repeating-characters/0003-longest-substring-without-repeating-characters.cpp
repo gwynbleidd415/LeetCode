@@ -29,14 +29,12 @@ class Solution {
 
         while(swe < n){
             if(visited[s[swe]] != -1){
+                ans = max(ans, swe-sws);
                 sws = max(sws, visited[s[swe]] + 1);
             }
-            visited[s[swe]] = swe;
-            ans = max(ans, swe-sws + 1);
-            ++swe;
+            visited[s[swe]] = swe++;
         }
-
-        return ans;
+        return max(ans, swe-sws);
     }
 public:
     int lengthOfLongestSubstring(string s) {
