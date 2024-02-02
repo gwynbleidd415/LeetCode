@@ -32,7 +32,7 @@ class Solution {
                 ans = max(ans, swe-sws);
                 sws = max(sws, visited[s[swe]] + 1);
             }
-            visited[s[swe]] = swe++;
+            visited[s[swe++]] = swe;
         }
         return max(ans, swe-sws);
     }
