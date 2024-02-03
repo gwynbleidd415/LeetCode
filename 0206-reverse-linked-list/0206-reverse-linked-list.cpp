@@ -10,9 +10,7 @@
  */
 class Solution {
     ListNode* solution1(ListNode* head) {
-        if(head == nullptr) return head;
-        ListNode *prev{head}, *curr{head->next}, *next;
-        head->next = nullptr;
+        ListNode *prev{nullptr}, *curr{head}, *next;
         while(curr) {
             next = curr->next;
             curr->next = prev;
