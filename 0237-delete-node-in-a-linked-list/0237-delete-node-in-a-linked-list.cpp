@@ -16,8 +16,15 @@ class Solution {
         node->next = nullptr;
         delete node->next;
     }
+    void solution2(ListNode* node) {
+        node->val = node->next->val;
+        ListNode *temp = node->next;
+        node->next = node->next->next;
+        delete temp;
+    }
 public:
     void deleteNode(ListNode* node) {
-        solution1(node);
+        // solution1(node);
+        solution2(node);
     }
 };
