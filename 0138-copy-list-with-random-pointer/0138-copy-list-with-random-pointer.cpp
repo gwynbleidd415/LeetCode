@@ -41,20 +41,20 @@ class Solution {
             iter->next = newNode;
             iter = iter->next->next;
         }
-        Node *newHead{head->next}, *nextIter;
         iter = head;
         while(iter) {
             if(iter->random) iter->next->random = iter->random->next;
             iter = iter->next->next;
         }
         iter = head;
+        Node newHead(0), *newIter{&newHead};
         while(iter) {
-            nextIter = iter->next->next;
-            if(nextIter) iter->next->next = nextIter->next;
-            iter->next = nextIter;
-            iter = nextIter;
+            newIter->next = iter->next;
+            iter->next = iter->next->next;
+            iter = iter->next;
+            newIter = newIter->next;
         }
-        return newHead;
+        return newHead.next;
     }
 public:
     Node* copyRandomList(Node* head) {
