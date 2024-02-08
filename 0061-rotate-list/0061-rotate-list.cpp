@@ -24,8 +24,22 @@ private:
         temp->next = nullptr;
         return ans;
     }
+    ListNode* solution2(ListNode* head, int k) {
+        if(head == nullptr) return nullptr;
+        int count{1};
+        ListNode *temp{head};
+        while(temp->next) temp = temp->next, ++count;
+        k = k%count;
+        if(k == 0) return head;
+        temp->next = head;
+        for(int i{count-k};i>0;--i) temp = temp->next;
+        ListNode *ans = temp->next;
+        temp->next = nullptr;
+        return ans;
+    }
 public:
     ListNode* rotateRight(ListNode* head, int k) {
-        return solution1(head, k);
+        // return solution1(head, k);
+        return solution2(head, k);
     }
 };
