@@ -42,7 +42,7 @@ private:
     }
     double medianHelper2(vector<int> &nums1, vector<int> &nums2){
         if(nums1.size() > nums2.size())
-            return medianHelper(nums2, nums1);
+            return medianHelper2(nums2, nums1);
         int n1 = nums1.size(), n2 = nums2.size();
         int l1{0}, r1{n1}, lh{(n1+n2+1)>>1}, mid1, mid2, ml1, ml2, mr1, mr2;
         while(r1>=l1){
@@ -62,7 +62,7 @@ private:
     }
     double medianHelper3(vector<int> &nums1, vector<int> &nums2){
         if(nums1.size() > nums2.size())
-            return medianHelper(nums2, nums1);
+            return medianHelper3(nums2, nums1);
         int n1 = nums1.size(), n2 = nums2.size();
         int l1{0}, r1{n1}, lh{(n1+n2+1)>>1}, mid1, mid2, ml1, ml2, mr1, mr2;
         while(r1>=l1){
@@ -82,7 +82,7 @@ private:
     }
     double medianHelper4(vector<int> &nums1, vector<int> &nums2){
         if(nums1.size() > nums2.size())
-            return medianHelper(nums2, nums1);
+            return medianHelper4(nums2, nums1);
         int n1 = nums1.size(), n2 = nums2.size();
         if(n1 == 0){
             if(n2&1) return nums2[n2>>1];
@@ -106,6 +106,9 @@ private:
     }
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        // return medianHelper(nums1, nums2);
+        // return medianHelper2(nums1, nums2);
+        // return medianHelper3(nums1, nums2);
         return medianHelper4(nums1, nums2);
     }
 };
