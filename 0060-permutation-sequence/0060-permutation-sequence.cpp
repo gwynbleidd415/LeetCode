@@ -45,6 +45,7 @@ private:
         return to_string(curr);
     }
     string solution3(int n, int k) {
+        if(n == 1) return "1";
         string curr{""};
         vector<bool> taken(n, false);
         vector<int> factorial(n);
@@ -52,7 +53,7 @@ private:
         for(int i{2};i<n;++i) factorial[i] = factorial[i-1] * i;
         int temp, mod;
         --k;
-        for(int i{n-1};i>0;--i) {
+        for(int i{n-1};i>=0;--i) {
             temp = k / factorial[i];
             int count = -1;
             for(int j{0};j<n;++j) {
@@ -66,11 +67,11 @@ private:
             }
             k = k - temp * factorial[i];
         }
-        for(int j{0};j<n;++j) {
-            if(taken[j]) continue;
-            curr.push_back('0' + (char)(j+1));
-            break;
-        }
+        // for(int j{0};j<n;++j) {
+        //     if(taken[j]) continue;
+        //     curr.push_back('0' + (char)(j+1));
+        //     break;
+        // }
         return curr;
     }
 public:
