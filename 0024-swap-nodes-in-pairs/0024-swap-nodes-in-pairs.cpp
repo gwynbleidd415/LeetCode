@@ -34,9 +34,23 @@ private:
         }
         return head;
     }
+    ListNode* solution3(ListNode* head) {
+        ListNode *citr{head};
+        ListNode *dummy = new ListNode();
+        dummy->next = citr;
+        ListNode *prev{dummy};
+        while(citr && citr->next) {
+            prev->next = citr->next;
+            citr->next = citr->next->next;
+            prev->next->next = citr;
+            prev = citr, citr = citr->next;
+        }
+        return dummy->next;
+    }
 public:
     ListNode* swapPairs(ListNode* head) {
         // return solution1(head);
-        return solution2(head);
+        // return solution2(head);
+        return solution3(head);
     }
 };
