@@ -26,8 +26,17 @@ private:
         prev->next = citr;
         return nhead;
     }
+    ListNode* solution2(ListNode* head) {
+        ListNode *citr{head};
+        while(citr && citr->next) {
+            swap(citr->val, citr->next->val);
+            citr = citr->next->next;
+        }
+        return head;
+    }
 public:
     ListNode* swapPairs(ListNode* head) {
-        return solution1(head);
+        // return solution1(head);
+        return solution2(head);
     }
 };
