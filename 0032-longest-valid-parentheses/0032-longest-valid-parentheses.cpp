@@ -8,7 +8,7 @@ private:
             if(s[i] == '(') st.push(i);
             else {
                 st.pop();
-                if(st.size() == 0) {
+                if(st.empty()) {
                     st.push(i);
                 } else {
                     ans = max(ans, i-st.top());
