@@ -41,8 +41,26 @@ private:
         }
         return mans;
     }
+    string solution2(string &num1, string &num2) {
+        if(num1 == "0" || num2 == "0") return "0";
+        int n1 = num1.size(), n2 = num2.size(), tn{n1+n2-1};
+        string ans(n1+n2, '0');
+        int mult, tnij;
+        for(int i{n1-1};i>=0;--i) {
+            for(int j{n2-1};j>=0;--j) {
+                tnij = tn - i - j - 1;
+                mult = (num1[i] - '0') * (num2[j] - '0') + (ans[tnij]-'0');
+                ans[tnij] = mult%10 + '0';
+                ans[tnij+1] += mult/10;
+            }
+        }
+        if(ans.back() == '0') ans.pop_back();
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
 public:
     string multiply(string num1, string num2) {
-        return solution1(num1, num2);
+        // return solution1(num1, num2);
+        return solution2(num1, num2);
     }
 };
