@@ -10,8 +10,10 @@ private:
         }
         if(i != n) {
             newInterval.front() = min(newInterval.front(), intervals[i].front());
-            while(i<n && newInterval.back()>=intervals[i].front()) ++i;
-            if(i != 0) newInterval.back() = max(newInterval.back(), intervals[i-1].back());
+            if(intervals[i].front() <= newInterval.back()) {
+                while(i<n && newInterval.back()>=intervals[i].front()) ++i;
+                newInterval.back() = max(newInterval.back(), intervals[i-1].back());
+            }
         }
         ans.push_back(newInterval);
         while(i<n) {
