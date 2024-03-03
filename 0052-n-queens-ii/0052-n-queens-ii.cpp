@@ -25,8 +25,27 @@ private:
         solution1Helper(0, count, posFilled);
         return count;
     }
+    void solution2Helper(int ci, int &count, int n, vector<bool> &posFilled, vector<bool> &diagFilled, vector<bool> &rdiagFilled) {
+        if(ci == n) {
+            ++count;
+            return;
+        }
+        for(int i{0};i<n;++i) {
+            if(posFilled[i] || diagFilled[i+ci] || rdiagFilled[ci-i + n-1]) continue;
+            posFilled[i] = diagFilled[i+ci] = rdiagFilled[ci-i + n-1] = true;
+            solution2Helper(ci+1, count, n, posFilled, diagFilled, rdiagFilled);
+            posFilled[i] = diagFilled[i+ci] = rdiagFilled[ci-i + n-1] = false;
+        }
+    }
+    int solution2(int n) {
+        vector<bool> posFilled(n), diagFilled((n<<1)-1), rdiagFilled((n<<1)-1);
+        int count{0};
+        solution2Helper(0, count, n, posFilled, diagFilled, rdiagFilled);
+        return count;
+    }
 public:
     int totalNQueens(int n) {
-        return solution1(n);
+        // return solution1(n);
+        return solution2(n);
     }
 };
