@@ -31,8 +31,27 @@ private:
         if(ans == "") return "/";
         return ans;
     }
+    string solution2(string &path) {
+        istringstream iss(path);
+        string temp;
+        vector<string> paths;
+        while(getline(iss, temp, '/')) {
+            if(temp.empty() || temp == ".") continue;
+            if(temp == "..") {
+                if(!paths.empty()) paths.pop_back();
+            } else paths.push_back(temp);
+        }
+        string ans{""};
+        for_each(paths.begin(), paths.end(), [&ans](string &str) {
+            ans.push_back('/');
+            ans += str;
+        });
+        if(ans == "") return "/";
+        return ans;
+    }
 public:
     string simplifyPath(string path) {
-        return solution1(path);
+        // return solution1(path);
+        return solution2(path);
     }
 };
