@@ -53,9 +53,28 @@ private:
         lessi->next = eqgr.next;
         return less.next;
     }
+    ListNode* solution3(ListNode* head, int x) {
+        if(head == nullptr) return nullptr;
+        ListNode less, eqgr;
+        ListNode *lessi{&less}, *eqgri{&eqgr};
+        while(head) {
+            if(head->val < x) {
+                lessi->next = head;
+                lessi = head;
+            } else {
+                eqgri->next = head;
+                eqgri = head;
+            }
+            head = head->next;
+        }
+        eqgri->next = nullptr;
+        lessi->next = eqgr.next;
+        return less.next;
+    }
 public:
     ListNode* partition(ListNode* head, int x) {
         // return solution1(head, x);
-        return solution2(head, x);
+        // return solution2(head, x);
+        return solution3(head, x);
     }
 };
