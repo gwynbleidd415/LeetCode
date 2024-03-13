@@ -9,8 +9,17 @@ private:
         }
         return ans;
     }
+    vector<int> solution2(int n) {
+        int n2 = 1<<n;
+        vector<int> ans(n2);
+        for(int i{0};i<n2;++i) {
+            ans[i] = i^(i>>1);
+        }
+        return ans;
+    }
 public:
     vector<int> grayCode(int n) {
-        return solution1(n);
+        // return solution1(n);
+        return solution2(n);
     }
 };
