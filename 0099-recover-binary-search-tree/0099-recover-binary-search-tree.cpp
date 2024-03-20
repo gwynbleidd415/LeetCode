@@ -44,8 +44,26 @@ private:
         bool found{false};
         solution1Helper(root, INT64_MIN, INT64_MAX, found);
     }
+    void solution2Helper(TreeNode *root, TreeNode **prev, TreeNode **less, TreeNode **more) {
+        if(root == nullptr) return;
+        solution2Helper(root->left, prev, less, more);
+        if(*prev && (*prev)->val > root->val) {
+            if(!*more) {
+                *more = *prev;
+            }
+            *less = root;
+        }
+        *prev = root;
+        solution2Helper(root->right, prev, less, more);
+    }
+    void solution2(TreeNode* root) {
+        TreeNode *prev{nullptr}, *less{nullptr}, *more{nullptr};
+        solution2Helper(root, &prev, &less, &more);
+        swap(less->val, more->val);
+    }
 public:
     void recoverTree(TreeNode* root) {
-        solution1(root);
+        // solution1(root);
+        solution2(root);
     }
 };
