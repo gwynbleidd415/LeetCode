@@ -45,6 +45,7 @@ private:
             for(int j{0};j<s2.size();++j) {
                 if(s3[i+j+1] == s1[i] && dp[j+1]) continue;
                 else if(s3[i+j+1] == s2[j] && dp[j]) dp[j+1] = true;
+                else dp[j+1] = false;
             }
         }
         return dp.back();
