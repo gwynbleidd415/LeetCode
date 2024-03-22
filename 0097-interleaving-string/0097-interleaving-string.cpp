@@ -27,22 +27,32 @@ private:
         }
         for(int i{0};i<s1.size();++i) {
             for(int j{0};j<s2.size();++j) {
-                // cout<<i<<' '<<j<<' '<<s1[i]<<' '<<s2[j]<<' '<<s3[i+j]<<'\n';
                 if(s3[i+j+1] == s1[i] && dp[i][j+1]) dp[i+1][j+1] = true;
                 else if(s3[i+j+1] == s2[j] && dp[i+1][j]) dp[i+1][j+1] = true;
             }
         }
-        // for(auto i: dp) {
-        //     for(auto j: i) {
-        //         cout << j << ' ';
-        //     }
-        //     cout << '\n';
-        // }
         return dp.back().back();
+    }
+    bool solution3(string &s1, string &s2, string &s3) {
+        if(s3.size()!= s1.size() + s2.size()) return false;
+        vector<bool> dp(s2.size()+1);
+        dp.front() = true;
+        for(int i{0};i<s2.size();++i) {
+            dp[i+1] = s2[i] == s3[i] && dp[i];
+        }
+        for(int i{0};i<s1.size();++i) {
+            if(dp[0] && s3[i]!=s1[i]) dp[0] = false; 
+            for(int j{0};j<s2.size();++j) {
+                if(s3[i+j+1] == s1[i] && dp[j+1]) continue;
+                else if(s3[i+j+1] == s2[j] && dp[j]) dp[j+1] = true;
+            }
+        }
+        return dp.back();
     }
 public:
     bool isInterleave(string s1, string s2, string s3) {
         // return solution1(s1, s2, s3);
-        return solution2(s1, s2, s3);
+        // return solution2(s1, s2, s3);
+        return solution3(s1, s2, s3);
     }
 };
