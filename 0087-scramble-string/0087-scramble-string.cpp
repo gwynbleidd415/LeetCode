@@ -28,14 +28,14 @@ private:
             if(c1[i2] == c2[i2]) --diff;
             if(c1[i1] == c3[i1]) --diff1;
             if(c1[i3] == c3[i3]) --diff1;
-            if(diff == 0) {
-                if(solution1Helper(s1, s2, str1, i, str2, j, dp, vis) && solution1Helper(s1, s2, i+1, end1, j+1, end2, dp, vis)) {
+            if(diff1 == 0) {
+                if(solution1Helper(s1, s2, str1, i, i4, end2, dp, vis) && solution1Helper(s1, s2, i+1, end1, str2, i4-1, dp, vis)) {
                     dp[str1][end1][str2][end2] = true;
                     return true;
                 }
             }
-            if(diff1 == 0) {
-                if(solution1Helper(s1, s2, str1, i, i4, end2, dp, vis) && solution1Helper(s1, s2, i+1, end1, str2, i4-1, dp, vis)) {
+            if(diff == 0) {
+                if(solution1Helper(s1, s2, str1, i, str2, j, dp, vis) && solution1Helper(s1, s2, i+1, end1, j+1, end2, dp, vis)) {
                     dp[str1][end1][str2][end2] = true;
                     return true;
                 }
