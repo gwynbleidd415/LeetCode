@@ -29,8 +29,17 @@ private:
         }
         return profit;
     }
+    int solution2(vector<int> &prices) {
+        int n1 = prices.size()-1;
+        int ans{0};
+        for(int i{0};i<n1;++i) {
+            if(prices[i]<prices[i+1]) ans += prices[i+1]-prices[i];
+        }
+        return ans;
+    }
 public:
     int maxProfit(vector<int>& prices) {
-        return solution1(prices);
+        // return solution1(prices);
+        return solution2(prices);
     }
 };
