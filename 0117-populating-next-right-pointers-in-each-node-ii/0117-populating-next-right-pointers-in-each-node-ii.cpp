@@ -37,8 +37,27 @@ private:
         }
         return root;
     }
+    Node *solution2(Node *root) {
+        if(root == nullptr) return root;
+        Node *node{root};
+        while(node) {
+            Node dummy(0);
+            for(Node *nextLevel{&dummy}; node; node = node->next) {
+                if(node->left) {
+                    nextLevel->next = node->left;
+                    nextLevel = nextLevel->next;
+                } if(node->right) {
+                    nextLevel->next = node->right;
+                    nextLevel = nextLevel->next;
+                }
+            }
+            node = dummy.next;
+        }
+        return root;
+    }
 public:
     Node* connect(Node* root) {
-        return solution1(root);
+        // return solution1(root);
+        return solution2(root);
     }
 };
