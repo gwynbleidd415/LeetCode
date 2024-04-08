@@ -25,8 +25,24 @@ private:
         }
         return ans;
     }
+    int solution2(vector<int>& prices) {
+        int b1{INT_MAX}, b2{INT_MAX}, p1{0}, p2{0};
+        for(int price: prices) {
+            b1 = min(b1, price);
+            p1 = max(p1, price - b1);
+            b2 = min(b2, price - p1);
+            p2 = max(p2, price - b2);
+        }
+        return p2;
+    }
 public:
+    Solution(){
+        cin.tie(NULL);
+        cout.tie(NULL);
+        ios_base::sync_with_stdio(false);
+    }
     int maxProfit(vector<int>& prices) {
-        return solution1(prices);
+        // return solution1(prices);
+        return solution2(prices);
     }
 };
